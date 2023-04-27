@@ -274,6 +274,23 @@ def modUser(request):
         'resp':'ok'
     })
 
+def modTarea(request):
+    datos = json.load(request)
+    idTareaFinalizar = datos.get('idTareaFinalizar')
+    estado = datos.get('estado')
+    tareaRelacionada = tareasInformacion.objects.get(id=idTareaFinalizar)
+    tareaRelacionada.estadoTarea=estado
+    #comentarioTarea(
+    #    usuarioRelacionado=usuarioRelacionado,
+    #    tareaRelacionada=tareaRelacionada,
+    #    estadoTarea=estado
+    #).save()
+    
+    return JsonResponse({
+        'resp':'ok'
+    })
+
+
 def descargarReporteUsuarios(request,idUsuario):
     """
     PREGUNTA 1

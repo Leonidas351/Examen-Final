@@ -98,8 +98,12 @@ function finalizarTarea(idFinalizar)
 {
    
     console.log(idFinalizar)
-    numero = idFinalizar.split('')
-    console.log(numero[-1])
+    numero = idFinalizar.split(/(\d+)/)
+    idTareaFinalizar=numero[1]
+    console.log('estado'+numero[1])
+    console.log('test:')
+    let idEstado = document.getElementById('estado'+numero[1])
+    idEstado.innerHTML='FINALIZADO'
     /*
     Pregunta 5
     a.
@@ -118,4 +122,20 @@ function finalizarTarea(idFinalizar)
     ha sido modificada tambien en base de datos
     
     */
+
+    datos = {
+        'idTareaFinalizar':idTareaFinalizar,
+        'estado':'FINALIZADO'
+    }
+
+    fetch('/modTarea',{
+        method:"POST",
+        headers:{
+            "X-Requested-With":"XMLHttpRequest",
+            "X-CSRFToken": getCookie("csrftoken"),
+        },
+        body:JSON.stringify(datos)
+    })
+
+
 }
