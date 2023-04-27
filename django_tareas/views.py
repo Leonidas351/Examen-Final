@@ -256,20 +256,13 @@ def modUser(request):
     cargaId = datos.get('cargaId')
     newPhone = datos.get('newPhone')
     newProf = datos.get('newProf')
-    
+    print('-----------------------------------------------')
+    print(cargaId)
     usuarioRelacionado = User.objects.get(id=cargaId)
-    print('tlf inicial: ')
-    print(usuarioRelacionado.datosusuario.nroCelular)
     usuarioRelacionado.datosusuario.nroCelular=newPhone
     usuarioRelacionado.datosusuario.profesionUsuario=newProf
-    #datosUsuario(
-    #    user=usuarioRelacionado,
-    #    nroCelular=newPhone,
-    #    profesionUsuario=newProf
-    #).save()
+    usuarioRelacionado.datosusuario.save()
     print('-----------------------------------------------')
-    print('tlf nuevo?: ')
-    print(usuarioRelacionado.datosusuario.nroCelular)
     return JsonResponse({
         'resp':'ok'
     })
@@ -280,11 +273,7 @@ def modTarea(request):
     estado = datos.get('estado')
     tareaRelacionada = tareasInformacion.objects.get(id=idTareaFinalizar)
     tareaRelacionada.estadoTarea=estado
-    #comentarioTarea(
-    #    usuarioRelacionado=usuarioRelacionado,
-    #    tareaRelacionada=tareaRelacionada,
-    #    estadoTarea=estado
-    #).save()
+    tareaRelacionada.save()
     
     return JsonResponse({
         'resp':'ok'
