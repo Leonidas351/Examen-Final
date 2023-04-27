@@ -350,13 +350,20 @@ def descargarReporteUsuarios(request,idUsuario):
         numberTareas=len(tareasList)
         archivoPdf.grid(lista_x,lista_y)
         archivoPdf.setFont('Helvetica',12)
-        archivoPdf.drawString(lista_x[0] + 20, lista_y[1]-15, f'{usuario.first_name}')
-        archivoPdf.drawString(lista_x[0] + 80, lista_y[1]-15, f'{usuario.last_name}')
-        archivoPdf.drawString(lista_x[0] + 20, lista_y[1]-35, f'{usuario.username}')
-        archivoPdf.drawString(lista_x[0] + 100, lista_y[1]-35, f'{usuario.datosusuario.fechaIngreso}')
-        archivoPdf.drawString(lista_x[0] + 200, lista_y[1]-35, f'{usuario.datosusuario.nroCelular}')
-        archivoPdf.drawString(lista_x[0] + 20, lista_y[1]-55, f'{numberTareas}')
-        archivoPdf.drawString(lista_x[0] + 100, lista_y[1]-55, f'{usuario.datosusuario.tipoUsuario}')
+        archivoPdf.drawString(lista_x[0] + 20, lista_y[1]-15, f'Nombre :')
+        archivoPdf.drawString(lista_x[0] + 75, lista_y[1]-15, f'{usuario.first_name}')
+        archivoPdf.drawString(lista_x[0] + 145, lista_y[1]-15, f'Apellido :')
+        archivoPdf.drawString(lista_x[0] + 200, lista_y[1]-15, f'{usuario.last_name}')
+        archivoPdf.drawString(lista_x[0] + 20, lista_y[1]-35, f'Username :')
+        archivoPdf.drawString(lista_x[0] + 90, lista_y[1]-35, f'{usuario.username}')
+        archivoPdf.drawString(lista_x[0] + 150, lista_y[1]-35, f'Ingreso :')
+        archivoPdf.drawString(lista_x[0] + 200, lista_y[1]-35, f'{usuario.datosusuario.fechaIngreso}')
+        archivoPdf.drawString(lista_x[0] + 280, lista_y[1]-35, f'Número :')
+        archivoPdf.drawString(lista_x[0] + 335, lista_y[1]-35, f'{usuario.datosusuario.nroCelular}')
+        archivoPdf.drawString(lista_x[0] + 20, lista_y[1]-55, f'Num. Tareas :')
+        archivoPdf.drawString(lista_x[0] + 100, lista_y[1]-55, f'{numberTareas}')
+        archivoPdf.drawString(lista_x[0] + 120, lista_y[1]-55, f'Tipo :')
+        archivoPdf.drawString(lista_x[0] + 160, lista_y[1]-55, f'{usuario.datosusuario.tipoUsuario}')
         lista_y[0] = lista_y[0] - 60
         lista_y[1] = lista_y[1] - 60
     archivoPdf.save()
@@ -364,4 +371,4 @@ def descargarReporteUsuarios(request,idUsuario):
     
 
     reporteUsuarios=open(nombreArchivo,'rb')
-    return FileResponse(reporteUsuarios)#,as_attachment=True)
+    return FileResponse(reporteUsuarios,as_attachment=True)
